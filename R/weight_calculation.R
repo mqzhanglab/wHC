@@ -145,7 +145,7 @@ get_genic_intolerance=function(){
 #'
 #' @export
 #' @examples
-#' prior_expression=get_gene_expression(gene_label="symbols",tissue=c("Brain","Lung"),comb="max")
+#' prior_expression=get_gene_expression(gene_label="symbols",tissue=c("Liver","Lung"),comb="mean")
 #' prior_expression=get_gene_expression()
 #' @references Lonsdale, John, et al. "The genotype-tissue expression (GTEx) project." Nature genetics 45.6 (2013): 580.
 #'
