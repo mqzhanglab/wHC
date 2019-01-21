@@ -7,14 +7,16 @@ Step1: Data preparation.
 The genotype matrix has the format that each row represents a gene and each column represents a subject.The rownames can be the standard gene symbols or the Ensembl ID. Each element of the genotype matrix should be 0 (reference) or 1 (variant).
 
 The phenotype data should be the vector which matches the order of subjects of the genotype matrix, with the element as  0 (control) or 1 (case).
+
 example:
 library("wHC")
-#' pheno=rbinom(100,1,0.5)
-#' geno=matrix(rbinom(2000,1,0.1),nrow=20,ncol=100)
+pheno=rbinom(100,1,0.5)
+geno=matrix(rbinom(2000,1,0.1),nrow=20,ncol=100)
 
 If the stratified CMH tests are applied, besides the genotype and phenotype, we still needs the external sample informations, for the population stratification estimation. This information will have each rows represents the subjects and match the order of subjects of the phenotypes. Refer (Epstein, M. P., Allen, A. S., & Satten, G. A. ,2007) for more details.
+
 example:
-#' cur_pc=rbind(matrix(rnorm(500,0,1),ncol=10,nrow=50),matrix(rnorm(500,0.5,1),ncol=10,nrow=50))
+cur_pc=rbind(matrix(rnorm(500,0,1),ncol=10,nrow=50),matrix(rnorm(500,0.5,1),ncol=10,nrow=50))
 
 
 
@@ -33,30 +35,33 @@ example:
 
 Step3: weight generation
 The external information of each individual genes will be grabed from the following functions.Those information can based on the genetic network structures of genes within the given set.
+
 example:
-#' library("igraph")
-#' interact_m=matrix(rbinom(100000,1,0.3),100,100)
-#' deg=get_centrality(interact_m,w_option="deg",direct_option=FALSE,mode_option="all") #for degree
-#' closn=get_centrality(interact_m,w_option="closn",direct_option=FALSE,mode_option="all") #for closeness
-#' betn=get_centrality(interact_m,w_option="betn",direct_option=FALSE,mode_option="all") # for betweenness
-#' eigen=get_centrality(interact_m,w_option="eigen",direct_option=FALSE,mode_option="all") #for eigenvector centrality
-#' page_rank=get_centrality(interact_m,w_option="pagerank",direct_option=TRUE,mode_option="all") #for pagerank centrality
+library("igraph")
+interact_m=matrix(rbinom(100000,1,0.3),100,100)
+deg=get_centrality(interact_m,w_option="deg",direct_option=FALSE,mode_option="all") #for degree
+closn=get_centrality(interact_m,w_option="closn",direct_option=FALSE,mode_option="all") #for closeness
+betn=get_centrality(interact_m,w_option="betn",direct_option=FALSE,mode_option="all") # for betweenness
+eigen=get_centrality(interact_m,w_option="eigen",direct_option=FALSE,mode_option="all") #for eigenvector centrality
+page_rank=get_centrality(interact_m,w_option="pagerank",direct_option=TRUE,mode_option="all") #for pagerank centrality
 
 To be more specifically, we extract genes and all of their interactions reported in human beings from biogrid and gets the networks from the MSigDB (gmt format).
+
 example
-#' human_whole=as.matrix(human_whole[,c(2,3,8,9,10,11)])
-#' human_whole=unique(human_whole)
-#' human_whole=as.matrix(human_whole[order(human_whole[,2]),])
-#' human_whole=as.matrix(human_whole[order(human_whole[,1]),])
-#' human_whole[,1]=as.numeric(human_whole[,1])
-#' human_whole[,2]=as.numeric(human_whole[,2])
-#' human_whole=human_whole[,1:2]
-#' res=match_prior_info_centrality(net,human_whole,add_option="none",
-#' report_option=TRUE,w_option="pagerank",direct_option=TRUE,mode_option="all")
+human_whole=as.matrix(human_whole[,c(2,3,8,9,10,11)])
+human_whole=unique(human_whole)
+human_whole=as.matrix(human_whole[order(human_whole[,2]),])
+human_whole=as.matrix(human_whole[order(human_whole[,1]),])
+human_whole[,1]=as.numeric(human_whole[,1])
+human_whole[,2]=as.numeric(human_whole[,2])
+human_whole=human_whole[,1:2]
+res=match_prior_info_centrality(net,human_whole,add_option="none",
+report_option=TRUE,w_option="pagerank",direct_option=TRUE,mode_option="all")
 
 Otherwise, we can get the gene intolerance information from the database of Petrovski, S. et al, 2013
+
 example
-#' genic_intolerance=get_genic_intolerance()
+genic_intolerance=get_genic_intolerance()
 
 Get gene expression data of specific tissues from GTEx
 example
@@ -70,10 +75,10 @@ example
 
 And we can match those prior information to the given gene set from collection of MSigDB
 example
-#' net=net.h.all.v6.1.symbols
-#' #net from MSigDB (software.broadinstitute.org/gsea/msigdb): "h.all.v6.1.symbols.gmt"
-#' prior_gi=get_genic_intolerance()
-#' prior_net=match_prior_info(net,prior_gi)
+net=net.h.all.v6.1.symbols
+#net from MSigDB (software.broadinstitute.org/gsea/msigdb): "h.all.v6.1.symbols.gmt"
+prior_gi=get_genic_intolerance()
+prior_net=match_prior_info(net,prior_gi)
 
 
 
@@ -81,16 +86,17 @@ Step4: weighted higher criticism calculation.
 
 The weight can be converted from the external information according to w=1/(a x prior_info+b x mean(prior_info)). It is then scaled into mean(w)=1. Here we take a=0.95 and b=0.05.
 example
-#' w0=trans_w(prior_gi)
+w0=trans_w(prior_gi)
 
 
 Then the weighted pvalues is calculated and curved based on the cdf functions.
-#' @examples
-#' pval=matrix(nrow=w0,ncol=5)
-#' pval=as.matrix(apply(pval,2,function(x){return(runif(length(w0),0,1))}))
-#' pwval=cal_cdf(pval,w=w0)
+
+example
+pval=matrix(nrow=w0,ncol=5)
+pval=as.matrix(apply(pval,2,function(x){return(runif(length(w0),0,1))}))
+pwval=cal_cdf(pval,w=w0)
 
 Finally, the higher criticism can be applied to the pvalues. Each colum represents a set of pvalues from the corresponding set of genes, and will return a single higher criticism score through our method.
-#' hc_cal(pwval,t0=0.4)
+hc_cal(pwval,t0=0.4)
 
 
