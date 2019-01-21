@@ -23,7 +23,7 @@ The data resources comes from tpm of genes counts of RNAseq data of GTEx (gtexpo
 It based on GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_tpm.gct.gz (Retrive Nov (2013))
 }
 \examples{
-prior_expression=get_gene_expression(gene_label="symbols",tissue=c("Brain","Lung"),comb="max")
+prior_expression=get_gene_expression(gene_label="symbols",tissue=c("Liver","Lung"),comb="mean")
 prior_expression=get_gene_expression()
 }
 \references{
