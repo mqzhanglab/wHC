@@ -6,7 +6,7 @@ This package is used for the application of the weighted higher criticism on the
 
 Here's the instructions for a standard workflow.
 
-# Data preparation.
+# Data preparation
 The genotype matrix has the format that each row represents a gene and each column represents a subject.The rownames can be the standard gene symbols or the Ensembl ID. Each element of the genotype matrix should be 0 (reference) or 1 (variant).
 
 The phenotype data should be the vector which matches the order of subjects of the genotype matrix, with the element as  0 (control) or 1 (case).
@@ -26,7 +26,7 @@ cur_pc=rbind(matrix(rnorm(500,0,1),ncol=10,nrow=50),matrix(rnorm(500,0.5,1),ncol
 ```
 
 
-#pvalue calculation
+# pvalue calculation
 If the stratified CMH tests are applied,run strat_score_cal_glm to calculate the stratification formation based on generalized linear regression. Refer (Epstein, M. P., Allen, A. S., & Satten, G. A. ,2007) for more details.
 
 example:
@@ -42,7 +42,7 @@ pval=pval_ss_cal(pheno,geno,strata,nperm=0, alter="greater",exact_option=TRUE)
 ```
 
 
-#weight generation
+# weight generation
 The external information of each individual genes will be grabed from the following functions.Those information can based on the genetic network structures of genes within the given set.
 
 example:
@@ -105,7 +105,7 @@ prior_net=match_prior_info(net,prior_gi)
 
 
 
-#weighted higher criticism calculation.
+# weighted higher criticism calculation.
 The weight can be converted from the external information according to w=1/(a x prior_info+b x mean(prior_info)). It is then scaled into mean(w)=1. Here we take a=0.95 and b=0.05.
 
 example:
