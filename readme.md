@@ -1,13 +1,4 @@
----
-title: "wHC"
-author: "Mengqi Zhang"
-date: "9/16/2019"
-output: html_document
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # weighted Higher Criticism Instruction
 
