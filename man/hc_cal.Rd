@@ -22,10 +22,10 @@ Then define the statistic T as T=(Sn(p(i))-n x p(i))/sqrt(n x p(i) x (1-p(i))).
 The higher criticism is calculated with HCmax=max T_(i). where 0<i<=(t0ratio x n)
 }
 \examples{
-pval=matrix(runif(20,0,1),ncol=4,nrow=5)
-w0=seq(0.5,1.5,by=0.25)
+pval=matrix(runif(200,0,1),ncol=4,nrow=50)
+w0=seq(0.5,1.5,length=50)
 pwval=cal_cdf(pval,w=w0)
-hc_cal(pwval,t0=0.4)
+hc_cal(pwval,t0ratio=0.4)
 }
 \references{
 Donoho, D., & Jin, J. (2004). Higher Criticism for Detecting Sparse Heterogeneous Mixtures. The Annals of Statistics, 32(3), 962–994.

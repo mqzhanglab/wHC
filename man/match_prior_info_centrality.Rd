@@ -4,9 +4,15 @@
 \alias{match_prior_info_centrality}
 \title{match_prior_info_centrality matches the centrality prior information to the given gene set from collection of MSigDB}
 \usage{
-match_prior_info_centrality(net, human_whole, add_option = "none",
-  report_option = TRUE, w_option = "deg", direct_option = FALSE,
-  mode_option = "all")
+match_prior_info_centrality(
+  net,
+  human_whole,
+  add_option = "none",
+  report_option = TRUE,
+  w_option = "deg",
+  direct_option = FALSE,
+  mode_option = "all"
+)
 }
 \arguments{
 \item{net}{dataframe the gmt file from collections of MSigDB, broad institute. each line represents a pathway.please read in with read.csv with header=FALSE and stringAsFactors = FALSE.}

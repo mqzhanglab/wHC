@@ -4,8 +4,7 @@
 \alias{pval_ss_cal}
 \title{pval_ss_cal calculates pvalues of each genes between disease and test genotype}
 \usage{
-pval_ss_cal(dis_ob, g, strata = NA, nperm = 0, alter = "greater",
-  exact = TRUE)
+pval_ss_cal(dis_ob, g, strata = NA, nperm = 0, alter = "greater", exact = TRUE)
 }
 \arguments{
 \item{dis_ob}{0-1 vector shows the subjects has disease (1) or not (0)}

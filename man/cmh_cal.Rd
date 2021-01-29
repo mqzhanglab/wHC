@@ -4,8 +4,14 @@
 \alias{cmh_cal}
 \title{cmh_cal is the function of the cmh test for single genes with stratas}
 \usage{
-cmh_cal(dis, cur_g, strata_vector, k = 1, alter_option = "greater",
-  exact_option = TRUE)
+cmh_cal(
+  dis,
+  cur_g,
+  strata_vector,
+  k = 1,
+  alter_option = "greater",
+  exact_option = TRUE
+)
 }
 \arguments{
 \item{dis}{is a n-length numeric vector of indicators of phenotypes from n samples.}

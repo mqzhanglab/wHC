@@ -4,8 +4,7 @@
 \alias{match_prior_info}
 \title{match_prior_info match the prior information to the given gene set from collection of MSigDB}
 \usage{
-match_prior_info(net, prior_info, add_option = "none",
-  report_option = TRUE)
+match_prior_info(net, prior_info, add_option = "none", report_option = TRUE)
 }
 \arguments{
 \item{net}{dataframe the gmt file from collections of Molecular signatures database (MSigDB), broad institute.}

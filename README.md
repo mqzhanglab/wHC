@@ -1,8 +1,8 @@
 
 
-# weighted Higher Criticism Instruction
+# weighted Goodness-of-fit tests / Higher Criticism Instruction
 
-This package is used for the application of the weighted higher criticism on the given gene sets. It provides codes that is able to calculate the pvalues based on single fisher exact tests or the stratified CMH tests (Epstein, M. P., Allen, A. S., & Satten, G. A. ,2007).
+This package is used for the application of the weighted Goodness-of-fit tests / higher criticism on the given gene sets. It provides codes that is able to calculate the pvalues based on single fisher exact tests or the stratified CMH tests (Epstein, M. P., Allen, A. S., & Satten, G. A. ,2007).
 
 Here's the instructions for a standard workflow.
 
@@ -115,7 +115,7 @@ w0=trans_w(prior_gi)
 
 Then the weighted pvalues is calculated and curved based on the cdf functions.
 example:
-```{r pressure}
+```{r cal_cdf}
 pval=matrix(nrow=w0,ncol=5)
 pval=as.matrix(apply(pval,2,function(x){return(runif(length(w0),0,1))}))
 pwval=cal_cdf(pval,w=w0)
@@ -123,6 +123,30 @@ pwval=cal_cdf(pval,w=w0)
 
 Finally, the higher criticism can be applied to the pvalues. Each colum represents a set of pvalues from the corresponding set of genes, and will return a single higher criticism score through our method.
 example:
-```{r pressure}
+```{r hc_cal}
 hc_cal(pwval,t0=0.4)
 ```
+
+
+Besides the higher criticism, there are some other goodness-of-fit tests can be applied to the pvalues. For example, the Anderson-Darling (Anderson & Darling, 1952) statistics, the Berk-Jones (Berk & Jones, 1979) statistics.etc. Those method can be characterized as a method for single point estimation (wald, score, likelihood ratio ) plus a method for signal accumulation (L1 norm, L2 norm, supreme, etc). Those can be chosen through the following function. See the manual for more details.
+example:
+```{r gof_cal}
+gof_cal(pwval,t0=0.4)
+```
+References:
+
+References:
+
+Berk, R. H., & Jones, D. H. (1979). Goodness-of-fit test statistics that dominate the Kolmogorov statistics. Zeitschrift Für Wahrscheinlichkeitstheorie Und Verwandte Gebiete, 47(1), 47–59.
+
+Donoho, D., & Jin, J. (2004). Higher criticism for detecting sparse heterogeneous mixtures. The Annals of Statistics, 32(3), 962–994. 
+
+Donoho, D., & Jin, J. (2008). Higher criticism thresholding: Optimal feature selection when useful features are rare and weak. Proceedings of the National Academy of Sciences, 105(39), 14790–14795. 
+
+Einmahl, J. H. J., & Mckeague, I. W. (2003). Empirical likelihood based hypothesis testing. Bernoulli, 9(2), 267–290. 
+
+Storey, J. D. (2003). The Positive False Discovery Rate: A Bayesian Interpretation and the q-Value. The Annals of Statistics, 31(6), 2013–2035.
+
+Wellner, J. A., & Koltchinskii, V. (2003). A Note on the Asymptotic Distribution of Berk—Jones Type Statistics under the Null Hypothesis. In J. Hoffmann-Jørgensen, J. A. Wellner, & M. B. Marcus (Eds.), High Dimensional Probability III (pp. 321–332). 
+
+

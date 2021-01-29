@@ -4,8 +4,12 @@
 \alias{get_centrality}
 \title{get_centrality match the centrality prior information to the given gene set from collection of MSigDB}
 \usage{
-get_centrality(interact_m, w_option = "deg", direct_option = FALSE,
-  mode_option = "all")
+get_centrality(
+  interact_m,
+  w_option = "deg",
+  direct_option = FALSE,
+  mode_option = "all"
+)
 }
 \arguments{
 \item{interact_m}{represents the genetic network. It is the adjacency matrix of a graph with each node represents a gene.}

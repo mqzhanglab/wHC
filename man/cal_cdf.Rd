@@ -18,8 +18,8 @@ numeric vector with each elements is a Higher criticism values calculated from e
 It calculates the CDF(Cumulative Distribution Function) of weighted pvalues from the original pvalues and their weights and assign new pvalues based on this CDF.
 }
 \examples{
-pval=matrix(runif(20,0,1),ncol=4,nrow=5)
-w0=seq(0.5,1.5,by=0.25)
+pval=matrix(runif(200,0,1),ncol=4,nrow=50)
+w0=seq(0.5,1.5,length=50)
 pwval=cal_cdf(pval,w=w0)
 }
 \references{

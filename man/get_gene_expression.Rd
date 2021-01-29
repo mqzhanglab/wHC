@@ -4,8 +4,11 @@
 \alias{get_gene_expression}
 \title{This function get gene expression data of specific tissues from GTEx}
 \usage{
-get_gene_expression(gene_label = "ensembl_gene_id",
-  tissue = support_gtex_tissue(), comb = "none")
+get_gene_expression(
+  gene_label = "ensembl_gene_id",
+  tissue = support_gtex_tissue(),
+  comb = "none"
+)
 }
 \arguments{
 \item{gene_label}{is the gene names of the returning vector or matrix.It can be "ensembl_gene_id" or "symbols"}

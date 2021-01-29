@@ -2,22 +2,23 @@
 #'
 #' The weight is calculated with the equation: w=1/(a x prior_info+b x mean(prior_info)) and then scaled into mean(w)=1. Here we take a=0.95 and b=0.05.
 #'
-#' @param w a numeric vector which is the original statistic for weight
-#' @return numeric vector the transfered weight with around mean~1, min~0.05.
+#' @param w a numeric vector which is the original statistic for weight,need to be non-negative
+#' @return a numeric vector of the transfered weight with around mean~1, min~0.05.
 #'  Missing values in input are transfered into 1
 #' @export
 #' @examples
-#' a=c(NA,rnorm(7,0,1))
+#' a=c(NA,exp(rnorm(7,0,1)))
 #' trans_w(a)
 trans_w=function(w){
   #w transfer to 1/w, with mean(1/0.95*w+0.05*(mean(w)))=1, to avoid zeros, we set lower boundary
-  if(max(w)==min(w)){
+  if(max(w,na.rm=TRUE)==min(w,na.rm=TRUE)){
     return(w/w)
   }
   else{
-    w0=1/(0.95*w+0.05*(mean(w)))
+    w0=1/(0.95*w+0.05*(mean(w,na.rm=TRUE)))
     #w0=length(w)/(w*(length(w)-1)+mean(w))
-    w0=w0/mean(w0)
+    w0=w0/mean(w0,na.rm=TRUE)
+    w0[is.na(w0)]=1
     return(w0)
   }
 }
@@ -34,8 +35,8 @@ trans_w=function(w){
 #' @export
 #'
 #' @examples
-#' pval=matrix(runif(20,0,1),ncol=4,nrow=5)
-#' w0=seq(0.5,1.5,by=0.25)
+#' pval=matrix(runif(200,0,1),ncol=4,nrow=50)
+#' w0=seq(0.5,1.5,length=50)
 #' pwval=cal_cdf(pval,w=w0)
 #' @references Genovese, C. R., Roeder, K., & Wasserman, L. (2006). False Discovery Control with p-Value Weighting. Biometrika, 93(3), 509–524.
 cal_cdf=function(pm,w=1){
@@ -65,10 +66,10 @@ cal_cdf=function(pm,w=1){
 #' @useDynLib wHC
 #'
 #' @examples
-#' pval=matrix(runif(20,0,1),ncol=4,nrow=5)
-#' w0=seq(0.5,1.5,by=0.25)
+#' pval=matrix(runif(200,0,1),ncol=4,nrow=50)
+#' w0=seq(0.5,1.5,length=50)
 #' pwval=cal_cdf(pval,w=w0)
-#' hc_cal(pwval,t0=0.4)
+#' hc_cal(pwval,t0ratio=0.4)
 #' @references Donoho, D., & Jin, J. (2004). Higher Criticism for Detecting Sparse Heterogeneous Mixtures. The Annals of Statistics, 32(3), 962–994.
 hc_cal=function(pm,t0ratio=1,filter=0){
   #step1: arrange the matrix
@@ -84,7 +85,7 @@ hc_cal=function(pm,t0ratio=1,filter=0){
     preHCm=preHC
     preHC[pm>=t0ratio]=NA
     preHC[pm<=filter]=NA
-    HC=apply(preHC,2,function(x){return(max(x,na.rm=TRUE))})
+    HC=suppressWarnings(apply(preHC,2,function(x){return(max(x,na.rm=TRUE))}))
   }
   return(HC)
 }

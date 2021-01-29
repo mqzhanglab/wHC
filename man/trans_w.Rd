@@ -7,16 +7,16 @@
 trans_w(w)
 }
 \arguments{
-\item{w}{a numeric vector which is the original statistic for weight}
+\item{w}{a numeric vector which is the original statistic for weight,need to be non-negative}
 }
 \value{
-numeric vector the transfered weight with around mean~1, min~0.05.
+a numeric vector of the transfered weight with around mean~1, min~0.05.
  Missing values in input are transfered into 1
 }
 \description{
 The weight is calculated with the equation: w=1/(a x prior_info+b x mean(prior_info)) and then scaled into mean(w)=1. Here we take a=0.95 and b=0.05.
 }
 \examples{
-a=c(NA,rnorm(7,0,1))
+a=c(NA,exp(rnorm(7,0,1)))
 trans_w(a)
 }
