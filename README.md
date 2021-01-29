@@ -135,8 +135,6 @@ gof_cal(pwval,t0=0.4)
 ```
 References:
 
-References:
-
 Berk, R. H., & Jones, D. H. (1979). Goodness-of-fit test statistics that dominate the Kolmogorov statistics. Zeitschrift Für Wahrscheinlichkeitstheorie Und Verwandte Gebiete, 47(1), 47–59.
 
 Donoho, D., & Jin, J. (2004). Higher criticism for detecting sparse heterogeneous mixtures. The Annals of Statistics, 32(3), 962–994. 
