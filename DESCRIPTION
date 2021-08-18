@@ -1,7 +1,7 @@
 Package: wHC
 Title: Goodness of fit Statistics Calculation based on weighted p-values
 Version: 0.0.0.9000
-Authors@R: c(person("Mengqi", "Zhang", email = "meggy.q.zhang@gmail.com", role = "aut"), 
+Authors@R: c(person("Mengqi", "Zhang", email = "meggy.q.zhang@gmail.com", role = c("cre","aut")), 
            person("Andrew", "Allen", email = "asallen@duke.edu", role = "aut"))
 Description: This package is used for the application of the series of goodness-of-fit tests on the given gene sets. It provides codes that is able to calculate the pvalues based on single fisher exact tests or the stratified CMH tests (Epstein, M. P., Allen, A. S., & Satten, G. A. ,2007).
 Depends: R (>= 3.2.2)
