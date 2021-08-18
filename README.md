@@ -1,5 +1,4 @@
 
-
 # weighted Goodness-of-fit tests / Higher Criticism Instruction
 
 This package is used for the application of the weighted Goodness-of-fit tests / higher criticism on the given gene sets. It provides codes that is able to calculate the pvalues based on single fisher exact tests or the stratified CMH tests (Epstein, M. P., Allen, A. S., & Satten, G. A. ,2007).
