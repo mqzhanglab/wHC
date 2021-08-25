@@ -123,16 +123,22 @@ pwval=cal_cdf(pval,w=w0)
 Finally, the higher criticism can be applied to the pvalues. Each colum represents a set of pvalues from the corresponding set of genes, and will return a single higher criticism score through our method.
 example:
 ```{r hc_cal}
-hc_cal(pwval,t0=0.4)
+hc_cal(pwval,t0ratio=0.4)
 ```
 
 
 Besides the higher criticism, there are some other goodness-of-fit tests can be applied to the pvalues. For example, the Anderson-Darling (Anderson & Darling, 1952) statistics, the Berk-Jones (Berk & Jones, 1979) statistics.etc. Those method can be characterized as a method for single point estimation (wald, score, likelihood ratio ) plus a method for signal accumulation (L1 norm, L2 norm, supreme, etc). Those can be chosen through the following function. See the manual for more details.
 example:
 ```{r gof_cal}
-gof_cal(pwval,t0=0.4)
+gof_cal(pwval,t0ratio=0.4)
 ```
-References:
+# Cite:
+
+Zhang, Mengqi, et al. "Incorporating external information to improve sparse signal detection in rare‐variant gene‐set‐based analyses." Genetic epidemiology 44.4 (2020): 330-338.
+Zhang, Mengqi, et al. "Focused Goodness of Fit Tests for Gene Set Analyses" Submitted in 2021.
+
+
+# References
 
 Berk, R. H., & Jones, D. H. (1979). Goodness-of-fit test statistics that dominate the Kolmogorov statistics. Zeitschrift Für Wahrscheinlichkeitstheorie Und Verwandte Gebiete, 47(1), 47–59.
 
