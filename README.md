@@ -37,7 +37,7 @@ Then pvalues is calculated based on fisher exact tests (if exact_option=TRUE) or
 
 example:
 ```{r pval_cal}
-pval=pval_ss_cal(pheno,geno,strata,nperm=0, alter="greater",exact_option=TRUE)
+pval=pval_ss_cal(pheno,geno,strata,nperm=0, alter="greater")
 ```
 
 
@@ -48,11 +48,11 @@ example:
 ```{r w_centrality}
 library("igraph")
 interact_m=matrix(rbinom(100000,1,0.3),100,100)
-deg=get_centrality(interact_m,w_option="deg",direct_option=FALSE,mode_option="all") #for degree
-closn=get_centrality(interact_m,w_option="closn",direct_option=FALSE,mode_option="all") #for closeness
-betn=get_centrality(interact_m,w_option="betn",direct_option=FALSE,mode_option="all") # for betweenness
-eigen=get_centrality(interact_m,w_option="eigen",direct_option=FALSE,mode_option="all") #for eigenvector centrality
-page_rank=get_centrality(interact_m,w_option="pagerank",direct_option=TRUE,mode_option="all") #for pagerank centrality
+deg=wHC:::get_centrality(interact_m,w_option="deg",direct_option=FALSE,mode_option="all") #for degree
+closn=wHC:::get_centrality(interact_m,w_option="closn",direct_option=FALSE,mode_option="all") #for closeness
+betn=wHC:::get_centrality(interact_m,w_option="betn",direct_option=FALSE,mode_option="all") # for betweenness
+eigen=wHC:::get_centrality(interact_m,w_option="eigen",direct_option=FALSE,mode_option="all") #for eigenvector centrality
+page_rank=wHC:::get_centrality(interact_m,w_option="pagerank",direct_option=TRUE,mode_option="all") #for pagerank centrality
 ```
 
 To be more specifically, we extract genes and all of their interactions reported in human beings from biogrid and gets the networks from the MSigDB (gmt format).
@@ -74,15 +74,15 @@ Otherwise, we can get the gene intolerance information from the database of Petr
 
 example:
 ```{r w_genic_intolerance}
-genic_intolerance=get_genic_intolerance()
+genic_intolerance=wHC:::get_genic_intolerance()
 ```
 
 Get gene expression data of specific tissues from GTEx
 
 example:
 ```{r w_expression}
-prior_expression=get_gene_expression(gene_label="symbols",tissue=c("Liver","Lung"),comb="mean")
-prior_expression=get_gene_expression()
+prior_expression=wHC:::get_gene_expression(gene_label="symbols",tissue=c("Liver","Lung"),comb="mean")
+prior_expression=wHC:::get_gene_expression()
 ```
 
 Get the estimated transcripts length
