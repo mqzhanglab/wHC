@@ -3,6 +3,7 @@
 export(cal_cdf)
 export(cmh_cal)
 export(find_rank)
+export(get_centrality)
 export(get_gene_expression)
 export(get_gene_length)
 export(get_genic_intolerance)

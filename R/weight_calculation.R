@@ -81,6 +81,7 @@ match_prior_info_centrality=function(net,human_whole,add_option="none",report_op
 #' @param direct_option if it is true, the network will be calculated as directed pathways, parameter especially for pagerank
 #' @param mode_option  parameters for centrality calculation, "out" for out-degree, "in" for in-degree or "all" or "total" for the sum of the two. see \code{\link{igraph}} for more details.
 #'
+#' @export
 #' @references Page, L., Brin, S., Motwani, R., & Winograd, T. (1999). The PageRank citation ranking: Bringing order to the web. Stanford InfoLab. Retrieved from http://ilpubs.stanford.edu:8090/422
 #' @references White, S., & Smyth, P. (2003). Algorithms for Estimating Relative Importance in Networks. In Proceedings of the Ninth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 266–275). New York, NY, USA: ACM. https://doi.org/10.1145/956750.956782
 get_centrality=function(interact_m,w_option="deg",direct_option=FALSE,mode_option="all"){
@@ -194,6 +195,7 @@ get_gene_expression=function(gene_label="ensembl_gene_id",tissue=support_gtex_ti
 #' @references Lonsdale, John, et al. "The genotype-tissue expression (GTEx) project." Nature genetics 45.6 (2013): 580.
 #' @references https://storage.googleapis.com/gtex_analysis_v7/rna_seq_data/GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_tpm.gct.gz (Retrive Nov (2013)).
 support_gtex_tissue=function(){
+  data("GTEx_RNASeQCv1.1.8_gene_median_tpm.gct")
   return(colnames(whole_tpm_median)[3:ncol(whole_tpm_median)])
 }
 

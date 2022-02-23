@@ -36,18 +36,18 @@ gof_cal(
 a numeric vector with each elements is a Higher criticism values calculated from each colum of the Pm
 }
 \description{
-For ordered p-values p(1)<p(2)<...<p(n).Define \eqn{ Sn(t)=sum_{i=1}^n 1_{p_{(i)}<=t} } .
+For ordered p-values \eqn{p_{(1)}<p_{(2)}<...<p_{(n)}}.Define \eqn{ Sn(t)=\sum_{i=1}^n 1_{p_{(i)}<=t} } .
 Then define the statistic T as
-T=(Sn(p(i))-n x p(i))/sqrt(n x p(i) x (1-p(i))) for score statistic. or
-T=(Sn(p(i))-n x p(i))/sqrt(Sn(p(i))*(n-Sn(p(i)))/n) for wald statistic. or
-T=nx(p(i)xlog(p(i)xn/Sn(p(i)))+(1-p(i))xlog((1-p(i))xn/(n-Sn(p(i)))))   for log likelihood ratio
+\eqn{T=(Sn(p_{(i)})-n x p_{(i)})/\sqrt(n x p_{(i)} x (1-p_{(i)}))} for score statistic. or
+\eqn{T=(Sn(p_{(i)})-n x p_{(i)})/\sqrt{Sn(p_{(i)})*(n-Sn(p_{(i)}))/n}} for wald statistic. or
+\eqn{T=n (p_{(i)}  log(p_{(i)} n / Sn(p_{(i)}))+(1-p_{(i)})log((1-p_{(i)})n/(n-Sn(p_{(i)}))))}  for log likelihood ratio
 }
 \details{
-The max method calculates the Tmax=max T_(i) where 0 < i < t0ration x n
-The sum method calculates the Tsum=sum T_(i) where 0 < i < t0ration x n
-The rsum is calculated with Trsum=1/n x sum T_(i). where 0<i<=(i_max),
+The max method calculates the \eqn{Tmax=max T__{(i)} where 0 < i < t0ration x n}
+The sum method calculates the \eqn{Tsum=sum T__{(i)} where 0 < i < t0ration x n}
+The rsum is calculated with \eqn{Trsum=1/n x sum T__{(i)}. where 0<i<=(i_max)},
 where i_max is the index of the maxium of Ts.
-The topsum is calculated with Ttopsum=1/n max T_(r).
+The topsum is calculated with \eqn{Ttopsum=1/n max T_(r)}.
 where r belongs to the subset that Ts in the subsets are the top t0ratio proportion among all Ts.
 }
 \examples{

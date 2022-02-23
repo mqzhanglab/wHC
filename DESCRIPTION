@@ -9,4 +9,4 @@ Imports: Rcpp (>= 0.11.0), biomaRt, igraph
 LinkingTo: Rcpp
 License: GPL(>=3)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
