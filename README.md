@@ -5,6 +5,13 @@ This package is used for the application of the weighted Goodness-of-fit tests /
 
 Here's the instructions for a standard workflow.
 
+# 0. Installation
+```
+# install.packages("devtools")
+devtools::install_github("mqzhanglab/wHC")
+```
+
+
 # 1. Data Preparation
 The genotype matrix has the format that each row represents a gene and each column represents a subject.The rownames can be the standard gene symbols or the Ensembl ID. Each element of the genotype matrix should be 0 (reference) or 1 (variant).
 
@@ -48,11 +55,11 @@ example:
 ```{r w_centrality}
 library("igraph")
 interact_m=matrix(rbinom(100000,1,0.3),100,100)
-deg=wHC:::get_centrality(interact_m,w_option="deg",direct_option=FALSE,mode_option="all") #for degree
-closn=wHC:::get_centrality(interact_m,w_option="closn",direct_option=FALSE,mode_option="all") #for closeness
-betn=wHC:::get_centrality(interact_m,w_option="betn",direct_option=FALSE,mode_option="all") # for betweenness
-eigen=wHC:::get_centrality(interact_m,w_option="eigen",direct_option=FALSE,mode_option="all") #for eigenvector centrality
-page_rank=wHC:::get_centrality(interact_m,w_option="pagerank",direct_option=TRUE,mode_option="all") #for pagerank centrality
+deg=get_centrality(interact_m,w_option="deg",direct_option=FALSE,mode_option="all") #for degree
+closn=get_centrality(interact_m,w_option="closn",direct_option=FALSE,mode_option="all") #for closeness
+betn=get_centrality(interact_m,w_option="betn",direct_option=FALSE,mode_option="all") # for betweenness
+eigen=get_centrality(interact_m,w_option="eigen",direct_option=FALSE,mode_option="all") #for eigenvector centrality
+page_rank=get_centrality(interact_m,w_option="pagerank",direct_option=TRUE,mode_option="all") #for pagerank centrality
 ```
 
 To be more specifically, we extract genes and all of their interactions reported in human beings from biogrid and gets the networks from the MSigDB (gmt format).
@@ -74,15 +81,15 @@ Otherwise, we can get the gene intolerance information from the database of Petr
 
 example:
 ```{r w_genic_intolerance}
-genic_intolerance=wHC:::get_genic_intolerance()
+genic_intolerance=get_genic_intolerance()
 ```
 
 Get gene expression data of specific tissues from GTEx
 
 example:
 ```{r w_expression}
-prior_expression=wHC:::get_gene_expression(gene_label="symbols",tissue=c("Liver","Lung"),comb="mean")
-prior_expression=wHC:::get_gene_expression()
+prior_expression=get_gene_expression(gene_label="symbols",tissue=c("Liver","Lung"),comb="mean")
+prior_expression=get_gene_expression()
 ```
 
 Get the estimated transcripts length
@@ -96,6 +103,7 @@ And we can match those prior information to the given gene set from collection o
 
 example:
 ```{r w_net}
+data("net.h.all.v6.1.symbols")
 net=net.h.all.v6.1.symbols
 #net from MSigDB (software.broadinstitute.org/gsea/msigdb): "h.all.v6.1.symbols.gmt"
 prior_gi=get_genic_intolerance()
@@ -132,10 +140,31 @@ example:
 ```{r gof_cal}
 gof_cal(pwval,t0ratio=0.4)
 ```
+
+# 5. Step-down minP calculation
+The function sdminp calculates the Step Down minP method. It implement the improved step-down minP algorithm by Ge et al, 2003 (box 4)
+The input is a vector of observed p-values ob, and a matrix with each colum is a permuated p-values.  Each row of the matrix represents the genes consistent with the observed pvalues and each column of the matrix represents the permutated iterations.
+It returns a numeric vector adjusted pvalues.
+example:
+```
+ob=rnorm(10,2,2)
+perm=matrix(rnorm(100,2,2),ncol=10,nrow=10)
+sdminp(ob,perm)
+```
+
+The function sdminp_fdr implements the improved step-down minP algorithm based on FDR by Ge et al, 2003 (box 5)
+It returns a numeric matrix with adjusted pvalues. The first column is the FDR adjusted pvalues.The second colum is the corresponding q-values.
+example:
+```
+ob=rnorm(10,2,2)
+perm=matrix(rnorm(100,2,2),ncol=10,nrow=10)
+sdminp_fdr(ob,perm)
+```
+
 # Cite:
 
 Zhang, Mengqi, et al. "Incorporating external information to improve sparse signal detection in rare‐variant gene‐set‐based analyses." Genetic epidemiology 44.4 (2020): 330-338.
-Zhang, Mengqi, et al. "Focused Goodness of Fit Tests for Gene Set Analyses" Submitted in 2021.
+Zhang, Mengqi, et al. "Focused goodness of fit tests for gene set analyses." Briefings in bioinformatics 23.1 (2022): bbab472.
 
 
 # References
