@@ -67,6 +67,9 @@ To be more specifically, we extract genes and all of their interactions reported
 example:
 ```{r w_network}
 data("BIOGRID-ORGANISM-Homo_sapiens-3.4.147.tab2.txt")
+data("h.all.v6.1.entrez.gmt")
+net=net.h.all.v6.1.entrez
+human_whole=human_whole_biogird_3.4.147
 human_whole=as.matrix(human_whole[,c(2,3,8,9,10,11)])
 human_whole=unique(human_whole)
 human_whole=as.matrix(human_whole[order(human_whole[,2]),])
