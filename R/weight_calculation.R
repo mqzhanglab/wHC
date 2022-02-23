@@ -15,6 +15,8 @@
 #' @export
 #' @seealso \code{\link{igraph}} which this function wraps
 #' @examples
+#' data("BIOGRID-ORGANISM-Homo_sapiens-3.4.147.tab2.txt")
+#' data("h.all.v6.1.entrez.gmt")
 #' net=net.h.all.v6.1.entrez
 #' #from MSigDB (http://software.broadinstitute.org/gsea/msigdb): "h.all.v6.1.entrez.gmt"
 #' human_whole=human_whole_biogird_3.4.147
