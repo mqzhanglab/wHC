@@ -165,6 +165,7 @@ sdminp_fdr(ob,perm)
 # Cite:
 
 Zhang, Mengqi, et al. "Incorporating external information to improve sparse signal detection in rare‐variant gene‐set‐based analyses." Genetic epidemiology 44.4 (2020): 330-338.
+
 Zhang, Mengqi, et al. "Focused goodness of fit tests for gene set analyses." Briefings in bioinformatics 23.1 (2022): bbab472.
 
 
