@@ -159,7 +159,7 @@ get_gene_expression=function(gene_label="ensembl_gene_id",tissue="",comb="none")
   if(gene_label=="symbols"){
     gene_name=whole_tpm_median[,2]
   }
-
+  whole_tpm_median=whole_tpm_median[,-1:2]
   if(tissue[1]!=""){
     res=as.matrix(whole_tpm_median[,tissue])
   }
