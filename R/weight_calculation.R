@@ -152,14 +152,14 @@ get_genic_intolerance=function(){
 #'
 get_gene_expression=function(gene_label="ensembl_gene_id",tissue="",comb="none"){
   data("GTEx_RNASeQCv1.1.8_gene_median_tpm.gct")
-  res=whole_tpm_median
+  res=as.matrix(whole_tpm_median[,-c(1,2)])
   if(gene_label=="ensembl_gene_id"){
     gene_name=whole_tpm_median[,1]
   }
   if(gene_label=="symbols"){
     gene_name=whole_tpm_median[,2]
   }
-  whole_tpm_median=whole_tpm_median[,-1:2]
+
   if(tissue[1]!=""){
     res=as.matrix(whole_tpm_median[,tissue])
   }
