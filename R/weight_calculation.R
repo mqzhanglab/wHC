@@ -150,15 +150,21 @@ get_genic_intolerance=function(){
 #' prior_expression=get_gene_expression()
 #' @references Lonsdale, John, et al. "The genotype-tissue expression (GTEx) project." Nature genetics 45.6 (2013): 580.
 #'
-get_gene_expression=function(gene_label="ensembl_gene_id",tissue=support_gtex_tissue(),comb="none"){
-  res=as.matrix(whole_tpm_median[,tissue])
-
+get_gene_expression=function(gene_label="ensembl_gene_id",tissue="",comb="none"){
+  data("GTEx_RNASeQCv1.1.8_gene_median_tpm.gct")
+  res=whole_tpm_median
   if(gene_label=="ensembl_gene_id"){
     gene_name=whole_tpm_median[,1]
   }
   if(gene_label=="symbols"){
     gene_name=whole_tpm_median[,2]
   }
+
+  if(tissue[1]!=""){
+    res=as.matrix(whole_tpm_median[,tissue])
+  }
+
+
 
   if(comb=="median"){
     res=as.numeric(apply(res,1,function(x){return(median(as.numeric(x),na.rm = TRUE))}))
@@ -299,7 +305,7 @@ match_prior_info=function(net,prior_info,add_option="none",report_option=TRUE){
   n=nrow(net)
   prior_value=as.numeric(prior_info)
   prior_name=names(prior_info)
-  set_prior=matrix(,nrow=n,ncol=1)
+  set_prior=matrix(nrow=n,ncol=1)
 
   w=matrix(ncol=1,nrow=0)
   for(i in 1:n){
